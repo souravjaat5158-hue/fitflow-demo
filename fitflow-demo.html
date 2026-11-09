@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitFlow | Gym Management Demo</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#172033;--muted:#687386;--blue:#2563eb;--line:#e5e9f2;--green:#159568}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px Arial,sans-serif}
+header{background:#101b35;color:white;padding:20px max(18px,calc((100% - 1050px)/2));display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:23px;font-weight:800;letter-spacing:.3px}.tag{font-size:12px;color:#cbd5e1;margin-top:4px}
+main{max-width:1050px;margin:24px auto;padding:0 16px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:24px;margin:0 0 6px}.muted{color:var(--muted);font-size:13px}
+button{border:0;border-radius:9px;padding:10px 14px;background:var(--blue);color:white;font-weight:700;cursor:pointer}
+nav{display:flex;gap:8px;overflow:auto;margin:16px 0}nav button{background:#e7edfb;color:#24416e;white-space:nowrap}nav button.active{background:var(--blue);color:white}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:0 5px 18px #17203308;animation:rise .45s both}
+.metric{font-size:27px;font-weight:800;margin:10px 0 5px}.green{color:var(--green)}.orange{color:#c47b12}
+section{margin-top:15px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted)}
+.pill{padding:5px 8px;border-radius:20px;background:#e8f8f0;color:#12805b;font-size:11px;font-weight:bold}.pending{background:#fff2d9;color:#a56809}
+.bar{height:9px;background:#edf0f7;border-radius:20px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:20px;animation:grow 1.2s forwards}
+.chart{height:150px;display:flex;align-items:end;gap:12px;padding:12px 4px 0}.col{flex:1;background:linear-gradient(#6d91f5,#2563eb);border-radius:7px 7px 2px 2px;animation:growup 1s both}.col:nth-child(2n){background:linear-gradient(#9b83ee,#6d4bd1)}
+.hidden{display:none}.notice{padding:12px;background:#fff8e9;border:1px solid #f5dfb1;border-radius:10px;margin:9px 0;font-size:13px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:28px}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes grow{to{width:var(--w)}}@keyframes growup{from{height:0}to{height:var(--h)}}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}h1{font-size:21px}main{margin-top:18px}.card{padding:13px}table{min-width:560px}.tablewrap{overflow:auto}}
+</style></head>
+<body>
+<header><div><div class="brand">⚡ FitFlow</div><div class="tag">GYM & CLIENT MANAGEMENT</div></div><div style="font-size:12px">DEMO ACCOUNT　●</div></header>
+<main>
+<div class="welcome"><div><h1>Welcome back, Fitness Club 👋</h1><div class="muted">Here is your gym business at a glance.</div></div><button onclick="addMember()">＋ Add member</button></div>
+<div class="grid">
+<div class="card"><div class="muted">Total members</div><div class="metric count" data-target="150">0</div><div class="green muted">↑ 12 this month</div></div>
+<div class="card"><div class="muted">Active members</div><div class="metric count" data-target="120">0</div><div class="green muted">80% active</div></div>
+<div class="card"><div class="muted">Monthly revenue</div><div class="metric count" data-target="80000" data-money="yes">₹0</div><div class="green muted">↑ 8.5% this month</div></div>
+<div class="card"><div class="muted">Pending payments</div><div class="metric count" data-target="15000" data-money="yes">₹0</div><div class="orange muted">12 payments due</div></div>
+</div>
+<nav><button class="active" onclick="show('overview',this)">Overview</button><button onclick="show('members',this)">Members</button><button onclick="show('payments',this)">Payments</button><button onclick="show('progress',this)">Workout progress</button><button onclick="show('reminders',this)">Reminders</button></nav>
+<div id="overview" class="view">
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+<div class="card"><div class="sectionhead"><b>Revenue overview</b><span class="muted">Last 7 days</span></div><div class="metric">₹80,000</div><div class="green muted">↑ 8.5% compared with last month</div><div class="chart"><div class="col" style="--h:40%;height:40%"></div><div class="col" style="--h:62%;height:62%"></div><div class="col" style="--h:48%;height:48%"></div><div class="col" style="--h:78%;height:78%"></div><div class="col" style="--h:57%;height:57%"></div><div class="col" style="--h:95%;height:95%"></div><div class="col" style="--h:72%;height:72%"></div></div><div class="muted">Mon　 Tue　 Wed　 Thu　 Fri　 Sat　 Sun</div></div>
+<div class="card"><b>Membership overview</b><p class="muted">Active members <b style="float:right">120</b></p><div class="bar"><span style="--w:80%"></span></div><p class="muted">Expiring soon <b style="float:right">12</b></p><div class="bar"><span style="--w:8%"></span></div><p class="muted">Expired <b style="float:right">18</b></p><div class="bar"><span style="--w:12%"></span></div></div>
+</div>
+<section class="card"><div class="sectionhead"><b>Recent members</b><button onclick="showByName('members')">View all →</button></div><div class="tablewrap"><table><thead><tr><th>MEMBER</th><th>PLAN</th><th>EXPIRY</th><th>STATUS</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+</div>
+<div id="members" class="view hidden"><section class="card"><div class="sectionhead"><b>Member directory</b><button onclick="addMember()">＋ Add member</button></div><input id="search" placeholder="Search members..." oninput="renderMembers()" style="padding:10px;border:1px solid var(--line);border-radius:8px;width:100%;margin-bottom:12px"><div class="tablewrap"><table><thead><tr><th>MEMBER</th><th>PHONE</th><th>PLAN</th><th>EXPIRY</th><th>STATUS</th></tr></thead><tbody id="memberRows"></tbody></table></div></section></div>
+<div id="payments" class="view hidden"><section class="card"><b>Payment tracking</b><div class="grid" style="grid-template-columns:repeat(2,1fr);margin:14px 0"><div class="card"><div class="muted">Collected</div><div class="metric">₹6,500</div></div><div class="card"><div class="muted">Pending</div><div class="metric orange">₹3,000</div></div></div><div class="tablewrap"><table><thead><tr><th>MEMBER</th><th>AMOUNT</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="paymentRows"></tbody></table></div></section></div>
+<div id="progress" class="view hidden"><section class="card"><b>Workout progress tracker</b><p class="muted">Example client progress records</p><div id="progressRows"></div></section></div>
+<div id="reminders" class="view hidden"><section class="card"><b>Membership & payment reminders</b><div class="notice">⚠️ Priya Verma — membership expires soon.</div><div class="notice">💳 Aman Singh — payment follow-up required.</div><div class="notice">⚠️ Vikas Kumar — payment is pending.</div><p class="muted">This demo displays sample reminders. Real WhatsApp messages require a messaging integration.</p></section></div>
+</main><footer>FitFlow • Interactive sample demo • Sample data only</footer>
+<script>
+let people=[{name:'Rahul Sharma',phone:'9876543210',plan:'Premium',expiry:'15 Nov 2026',status:'Active',weight:75,paid:2500},{name:'Priya Verma',phone:'9876543211',plan:'Standard',expiry:'11 Nov 2026',status:'Active',weight:62,paid:1500},{name:'Aman Singh',phone:'9876543212',plan:'Basic',expiry:'08 Nov 2026',status:'Expired',weight:82,paid:0},{name:'Neha Gupta',phone:'9876543213',plan:'Premium',expiry:'01 Dec 2026',status:'Active',weight:58,paid:2500},{name:'Vikas Kumar',phone:'9876543214',plan:'Standard',expiry:'12 Nov 2026',status:'Pending',weight:88,paid:0}];
+let pay=[{name:'Rahul Sharma',amount:2500,status:'Paid'},{name:'Priya Verma',amount:1500,status:'Paid'},{name:'Aman Singh',amount:1500,status:'Pending'},{name:'Neha Gupta',amount:2500,status:'Paid'},{name:'Vikas Kumar',amount:1500,status:'Pending'}];
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function status(s){return `<span class="pill ${s==='Paid'||s==='Active'?'':'pending'}">${s}</span>`}
+function renderMembers(){let q=(document.getElementById('search')?.value||'').toLowerCase();document.getElementById('memberRows').innerHTML=people.filter(p=>p.name.toLowerCase().includes(q)).map(p=>`<tr><td><b>${safe(p.name)}</b></td><td>${safe(p.phone)}</td><td>${safe(p.plan)}</td><td>${safe(p.expiry)}</td><td>${status(p.status)}</td></tr>`).join('')}
+function renderPayments(){document.getElementById('paymentRows').innerHTML=pay.map((p,i)=>`<tr><td>${safe(p.name)}</td><td>₹${p.amount.toLocaleString('en-IN')}</td><td>${status(p.status)}</td><td>${p.status==='Pending'?`<button onclick="markPaid(${i})">Mark paid</button>`:'✓'}</td></tr>`).join('')}
+function renderProgress(){document.getElementById('progressRows').innerHTML=people.map(p=>`<div style="padding:14px 0;border-bottom:1px solid var(--line)"><b>${safe(p.name)}</b><span style="float:right">${p.weight} kg</span><div class="bar"><span style="--w:${Math.min(100,p.weight)}%"></span></div><div class="muted">Sample weight record • Workout consistency tracked weekly</div></div>`).join('')}
+function renderRecent(){document.getElementById('recent').innerHTML=people.slice(0,4).map(p=>`<tr><td><b>${safe(p.name)}</b></td><td>${safe(p.plan)}</td><td>${safe(p.expiry)}</td><td>${status(p.status)}</td></tr>`).join('')}
+function show(id,btn){document.querySelectorAll('.view').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='members')renderMembers()}
+function showByName(id){show(id,document.querySelectorAll('nav button')[1])}
+function markPaid(i){pay[i].status='Paid';renderPayments()}
+function addMember(){let name=prompt('Enter member name:');if(!name)return;let phone=prompt('Enter phone number:')||'Not added';people.unshift({name,phone,plan:'Standard',expiry:'30 Nov 2026',status:'Active',weight:70,paid:1500});renderMembers();renderRecent();alert('Member added to this demo!')}
+document.querySelectorAll('.count').forEach(el=>{let target=+el.dataset.target,start=performance.now();function tick(now){let p=Math.min(1,(now-start)/1100),v=Math.round(target*(1-Math.pow(1-p,3)));el.textContent=el.dataset.money?'₹'+v.toLocaleString('en-IN'):v;if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)});
+renderMembers();renderPayments();renderProgress();renderRecent();
+</script></body></html>
